@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>НАШЕСТВИЕ 2025</title>
   <style>
     body {
@@ -20,6 +20,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      text-align: center;
     }
     h1 {
       font-size: 3em;
@@ -28,6 +29,7 @@
     p {
       font-size: 1.2em;
       margin-bottom: 30px;
+      max-width: 600px;
     }
     button {
       padding: 15px 30px;
@@ -37,6 +39,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      margin: 5px;
     }
     button:hover {
       background-color: #e64a19;
@@ -44,10 +47,29 @@
   </style>
 </head>
 <body>
-  <div class="overlay">
+  <div class="overlay" id="game-screen">
     <h1>НАШЕСТВИЕ 2025</h1>
-    <p>Мир разрушен. Ты последний, кто может всё изменить.</p>
-    <button onclick="alert('Загрузка...')">Начать игру</button>
+    <p>Ты очнулся в разрушенном городе. Повсюду пепел и мрак. Мир, каким ты его знал, больше не существует. Твоя цель — выжить.</p>
+    <button onclick="choosePath('left')">Пойти налево</button>
+    <button onclick="choosePath('building')">Исследовать здание</button>
+    <button onclick="choosePath('signal')">Поискать сигналы жизни</button>
   </div>
+
+  <script>
+    function choosePath(option) {
+      const gameScreen = document.getElementById("game-screen");
+      let result = "";
+
+      if (option === 'left') {
+        result = "<h1>Переулок</h1><p>Ты двинулся налево и оказался в узком переулке между разрушенными зданиями. Тишина пугает.</p>";
+      } else if (option === 'building') {
+        result = "<h1>Развалины</h1><p>Ты осторожно вошёл в здание. Там темно и пахнет гарью. Ты слышишь странные звуки из глубины...</p>";
+      } else if (option === 'signal') {
+        result = "<h1>Радио</h1><p>Ты нашёл старое радио. После помех ты уловил сигнал: '...есть выжившие... юг...'.</p>";
+      }
+
+      gameScreen.innerHTML = result + "<br><button onclick='location.reload()'>Вернуться назад</button>";
+    }
+  </script>
 </body>
 </html>
